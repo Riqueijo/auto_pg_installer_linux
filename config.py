@@ -1,8 +1,16 @@
 import subprocess as sb
 
+#sb.run('sudo apt-get --purge remove postgresql postgresql-*', shell=True, stdin=None, stdout=None, stderr=None, executable="/bin/bash")
+
+sb.run('''sudo apt-get install wget ca-certificates && wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add - && sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list' && sudo apt-get update && sudo apt-get install postgresql-9.2''', shell=True, stdin=None, stdout=None, stderr=None, executable="/bin/bash")
 
 
-sb.run('cd postgresql-9.2.4 && ./configure --prefix=/usr/local/pgsql/ && make && make install', shell=True, stdin=None, stdout=None, stderr=None, executable="/bin/bash")
+
+
+
+
+
+quit()
 
 ##  criando usuario
 
@@ -19,4 +27,3 @@ sb.run('sudo wget cliente.hospidata.com.br/downloads/api/Apps/Infraestrutura/Sao
 #iniciar banco
 
 sb.run('/usr/local/pgsql/bin/pg_ctl -D /usr/local/pgsql/data start', shell=True, stdin=None, stdout=None, stderr=None, executable="/bin/bash")
-
