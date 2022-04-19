@@ -14,10 +14,21 @@ cd postgresql-9.2.4
 sudo make
 sudo make install
 
-echo =-=-==-=-=-
+echo =-=-==-=-=--------------------------------------------------------
 
-adduser postgres
+sudo adduser postgres
 sudo mkdir -p /usr/local/pgsql/data
 sudo chown -R postgres.postgres /usr/local/pgsql
 sudo su postgres
-/usr/local/pgsql/bin/initdb -D /usr/local/pgsql/data -- locale=pt
+/usr/local/pgsql/bin/initdb -D /usr/local/pgsql/data && locale=pt_BR.UTF-8
+rm /usr/local/pgsql/share/timezone/America/Sao_Paulo 
+su h
+cd /usr/local/pgsql/share/timezone/America/
+sudo wget https://cliente.hospidata.com.br/downloads/api/Apps/Infraestrutura/Sao_Paulo --no-check-certificate
+
+sudo nano /etc/systemd/system/postgresql.service
+
+sudo chmod +x /etc/systemd/system/postgresql.service
+systemctl daemon-reload
+systemctl enable postgresql
+systemctl start postgresql
